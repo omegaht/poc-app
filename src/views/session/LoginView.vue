@@ -30,7 +30,7 @@
           <div class="invalid-feedback">{{ errors.password }}</div>
         </div>
         <div>
-          <MDBBtn color="primary" class="mb-3" :disabled="isSubmitting">
+          <MDBBtn color="primary" class="mb-3" :disabled="isSubmitting" type="submit">
             <span v-show="isSubmitting" class="spinner-border spinner-border-sm mr-1"></span>
             Login
           </MDBBtn>

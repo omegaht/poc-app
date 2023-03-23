@@ -30,6 +30,7 @@ export const useAuthStore = defineStore({
     logout(): void {
       this.user = null
       localStorage.removeItem('session')
+      localStorage.removeItem('favorites')
     }
   }
 })

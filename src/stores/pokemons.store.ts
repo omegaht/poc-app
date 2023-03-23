@@ -8,7 +8,7 @@ export const usePokemonsStore = defineStore({
     nextUrl: '',
     previousUrl: '',
     isLoading: true,
-    favorites: []
+    favorites: JSON.parse(localStorage.getItem('favorites')) || []
   }),
   actions: {
     async fecthPokemons(url = 'https://pokeapi.co/api/v2/pokemon/') {
@@ -30,6 +30,10 @@ export const usePokemonsStore = defineStore({
     },
     addToFavorites(pokemon: any) {
       this.favorites = [...this.favorites, pokemon]
+      localStorage.setItem('favorites', JSON.stringify(this.favorites))
+    },
+    isFavorite(pokemon: any) {
+      return this.favorites.some((favorited) => favorited.name === pokemon.name)
     }
   }
 })

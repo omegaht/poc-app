@@ -18,9 +18,11 @@
           </div>
           <div class="card-body">
             <!-- <img :src="pokemon.imageUrl" /> -->
-            <button class="btn btn-primary" @click.stop="pokemonsStore.addToFavorites(pokemon)">
-              Add to Favorites
-            </button>
+            <div v-if="!pokemonsStore.isFavorite(pokemon)">
+              <button class="btn btn-primary" @click.stop="pokemonsStore.addToFavorites(pokemon)">
+                Add to Favorites
+              </button>
+            </div>
           </div>
         </div>
       </div>

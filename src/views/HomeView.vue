@@ -12,53 +12,37 @@
       }"
     >
       <div v-for="(pokemon, index) in pokemons" :key="index">
-        <div class="card" @click="toggleFavorite(pokemon)">
+        <div class="card" @click="pokemonsStore.viewDetail(pokemon)">
           <div class="card-header">
             <h2>{{ pokemon.name }}</h2>
           </div>
           <div class="card-body">
             <!-- <img :src="pokemon.imageUrl" /> -->
-            <button class="btn">Add to Favorites</button>
+            <button class="btn btn-primary" @click.stop="pokemonsStore.addToFavorites(pokemon)">
+              Add to Favorites
+            </button>
           </div>
         </div>
       </div>
     </div>
     <div class="pagination">
-      <button class="btn" v-if="previousUrl" @click="loadPage(previousUrl)">Previous</button>
-      <button class="btn" v-if="nextUrl" @click="loadPage(nextUrl)">Next</button>
+      <button class="btn" v-if="previousUrl" @click="pokemonsStore.fecthPokemons(previousUrl)">
+        Previous
+      </button>
+      <button class="btn" v-if="nextUrl" @click="pokemonsStore.fecthPokemons(nextUrl)">Next</button>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  data() {
-    return {
-      pokemons: [],
-      nextUrl: '',
-      previousUrl: ''
-    }
-  },
-  mounted() {
-    this.loadPage('https://pokeapi.co/api/v2/pokemon/')
-  },
-  methods: {
-    loadPage(url: string) {
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          this.pokemons = data.results
-          this.nextUrl = data.next
-          this.previousUrl = data.previous
-        })
-        .catch((error) => console.log(error))
-    },
-    toggleFavorite(pokemon: any) {
-      // Navigate to the new page for the selected pokemon
-      this.$router.push({ name: 'detail', params: { pokemonId: pokemon.name } })
-    }
-  }
-}
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
+
+import { usePokemonsStore } from '@/stores'
+
+const pokemonsStore = usePokemonsStore()
+const { pokemons, nextUrl, previousUrl } = storeToRefs(pokemonsStore)
+
+pokemonsStore.fecthPokemons()
 </script>
 
 <style>

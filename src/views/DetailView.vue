@@ -29,14 +29,9 @@ export default {
     try {
       const response = await fetch(url)
       const data = await response.json()
-      console.log('🚀 ~ file: DetailView.vue:22 ~ mounted ~ data:', data)
       this.pokemon = data
       this.isLoading = false
       this.pokemonImg = data.sprites.front_default
-      console.log(
-        '🚀 ~ file: DetailView.vue:36 ~ mounted ~ data.sprites.front_default:',
-        data.sprites.front_default
-      )
     } catch (error) {
       console.error(error)
     }

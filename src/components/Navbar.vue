@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <router-link class="navbar-brand" to="/">My Website</router-link>
+      <router-link class="navbar-brand" to="/">POC App</router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -19,10 +19,7 @@
             <router-link class="nav-link" to="/">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/about">About</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/contact">Contact</router-link>
+            <router-link class="nav-link" to="/favorites">Favorites</router-link>
           </li>
         </ul>
       </div>

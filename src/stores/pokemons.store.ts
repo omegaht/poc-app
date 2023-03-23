@@ -8,7 +8,8 @@ export const usePokemonsStore = defineStore({
     nextUrl: '',
     previousUrl: '',
     isLoading: true,
-    favorites: JSON.parse(localStorage.getItem('favorites')) || []
+    favorites: JSON.parse(localStorage.getItem('favorites')) || [],
+    filteredList: []
   }),
   actions: {
     async fecthPokemons(url = 'https://pokeapi.co/api/v2/pokemon/') {
@@ -34,6 +35,11 @@ export const usePokemonsStore = defineStore({
     },
     isFavorite(pokemon: any) {
       return this.favorites.some((favorited) => favorited.name === pokemon.name)
+    },
+    filterPokemons(searchTerm: string) {
+      return this.pokemons.filter((pokemon) =>
+        pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
     }
   }
 })

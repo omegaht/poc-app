@@ -5,6 +5,7 @@
       gap: '24px'
     }"
   >
+    <Autocomplete />
     <div
       class="d-flex flex-wrap justify-content-between"
       :style="{
@@ -40,6 +41,7 @@
 import { storeToRefs } from 'pinia'
 
 import { usePokemonsStore } from '@/stores'
+import Autocomplete from '@/components/Autocomplete.vue'
 
 const pokemonsStore = usePokemonsStore()
 const { pokemons, nextUrl, previousUrl } = storeToRefs(pokemonsStore)

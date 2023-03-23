@@ -3,8 +3,7 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-
-import './assets/main.css'
+import 'mdb-vue-ui-kit/css/mdb.min.css'
 
 const app = createApp(App)
 

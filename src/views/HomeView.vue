@@ -1,38 +1,55 @@
 <template>
-  <div
-    class="d-flex flex-column w-50"
-    :style="{
-      gap: '24px'
-    }"
-  >
-    <Autocomplete />
-    <div
-      class="d-flex flex-wrap justify-content-between"
-      :style="{
-        gap: '16px'
-      }"
-    >
-      <div v-for="(pokemon, index) in pokemons" :key="index">
-        <div class="card" @click="pokemonsStore.viewDetail(pokemon)">
-          <div class="card-header">
-            <h2>{{ pokemon.name }}</h2>
-          </div>
-          <div class="card-body">
-            <!-- <img :src="pokemon.imageUrl" /> -->
-            <div v-if="!pokemonsStore.isFavorite(pokemon)">
-              <button class="btn btn-primary" @click.stop="pokemonsStore.addToFavorites(pokemon)">
-                Add to Favorites
-              </button>
+  <Navbar />
+  <div class="flex gap-24 flex-col">
+    <div v-if="isLoading">Loading . . .</div>
+    <div v-else class="flex flex-col gap-24 justify-center py-28">
+      <Autocomplete />
+      <div class="flex flex-wrap gap-8 justify-center">
+        <div v-for="(pokemon, index) in pokemons" :key="index">
+          <div
+            class="max-w-sm rounded overflow-hidden shadow-lg h-588"
+            @click="pokemonsStore.viewDetail(pokemon)"
+          >
+            <img
+              class="w-full"
+              :src="pokemon.sprites.front_default"
+              alt="Sunset in the mountains"
+            />
+            <div class="px-6 py-4">
+              <div class="font-bold text-xl mb-2">{{ pokemon?.name }}</div>
+              <p class="text-gray-700 text-base">
+                {{ pokemon?.description }}
+              </p>
+            </div>
+            <div class="px-6 pt-4 pb-2">
+              <div v-if="!pokemonsStore.isFavorite(pokemon)">
+                <button
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  @click.stop="pokemonsStore.addToFavorites(pokemon)"
+                >
+                  Add Favorite
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="pagination">
-      <button class="btn" v-if="previousUrl" @click="pokemonsStore.fecthPokemons(previousUrl)">
-        Previous
-      </button>
-      <button class="btn" v-if="nextUrl" @click="pokemonsStore.fecthPokemons(nextUrl)">Next</button>
+      <div class="flex gap-16 justify-center mb-16">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          v-if="previousUrl"
+          @click="pokemonsStore.fetchPokemons(previousUrl)"
+        >
+          Previous
+        </button>
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          v-if="nextUrl"
+          @click="pokemonsStore.fetchPokemons(nextUrl)"
+        >
+          Next
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -42,11 +59,12 @@ import { storeToRefs } from 'pinia'
 
 import { usePokemonsStore } from '@/stores'
 import Autocomplete from '@/components/Autocomplete.vue'
+import Navbar from '@/components/Navbar.vue'
 
 const pokemonsStore = usePokemonsStore()
-const { pokemons, nextUrl, previousUrl } = storeToRefs(pokemonsStore)
+const { pokemons, nextUrl, previousUrl, isLoading } = storeToRefs(pokemonsStore)
 
-pokemonsStore.fecthPokemons()
+pokemonsStore.fetchPokemons()
 </script>
 
 <style>

@@ -1,35 +1,33 @@
 <template>
-  <div class="max-w-sm rounded overflow-hidden shadow-lg">
-    <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains" />
+  <div
+    class="max-w-sm rounded overflow-hidden shadow-lg h-588"
+    @click="props.onClick && props.onClick(pokemon)"
+  >
+    <img class="w-full" :src="pokemon.sprites.front_default" alt="pokemon front image" />
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2">{{ pokemon?.name }}</div>
       <p class="text-gray-700 text-base">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores
-        et perferendis eaque, exercitationem praesentium nihil.
+        {{ pokemon?.description }}
       </p>
     </div>
     <div class="px-6 pt-4 pb-2">
-      <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        @click.stop="onAddToFavorite(pokemon)"
-      >
-        Add Favorite
-      </button>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Button
-      </button>
+      <div v-if="props.isFavorite ? !props.isFavorite(pokemon) : false">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          @click.stop="props.onAddFavorite && props.onAddFavorite(pokemon)"
+        >
+          Add Favorite
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  props: {
-    pokemon: Object,
-    onClick: Function,
-    onAddToFavorite: Function
-  }
+<script setup lang="ts">
+const props = defineProps({
+  pokemon: Object,
+  isFavorite: { type: Function, required: false },
+  onClick: { type: Function, required: false },
+  onAddFavorite: { type: Function, required: false }
 })
 </script>

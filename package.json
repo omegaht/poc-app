@@ -16,6 +16,7 @@
     "@vueuse/core": "^9.13.0",
     "mdb-vue-ui-kit": "^3.2.0",
     "pinia": "^2.0.32",
+    "v-click-outside": "^3.2.0",
     "vee-validate": "^4.8.3",
     "vue-click-outside": "^1.1.0",
     "vue-router": "^4.1.6",

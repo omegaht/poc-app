@@ -1,23 +1,17 @@
 <template>
-  <div
-    class="d-flex flex-wrap justify-content-between"
-    :style="{
-      gap: '16px'
-    }"
-  >
+  <Navbar />
+  <div class="flex flex-wrap gap-8 justify-center py-28">
     <div v-if="favorites.length === 0">No favorites yet</div>
     <div v-else v-for="(pokemon, index) in favorites" :key="index">
-      <div class="card">
-        <div class="card-header">
-          <h1>{{ pokemon.name }}</h1>
-        </div>
-      </div>
+      <Card :pokemon="pokemon" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import Card from '@/components/Card.vue'
+import Navbar from '@/components/Navbar.vue'
 
 import { usePokemonsStore } from '@/stores'
 

@@ -3,7 +3,7 @@
     class="max-w-sm rounded overflow-hidden shadow-lg h-588"
     @click="props.onClick && props.onClick(pokemon)"
   >
-    <img class="w-full" :src="pokemon.sprites.front_default" alt="pokemon front image" />
+    <img class="w-full" :src="pokemon?.sprites.front_default" alt="pokemon front image" />
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2">{{ pokemon?.name }}</div>
       <p class="text-gray-700 text-base">

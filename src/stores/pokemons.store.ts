@@ -23,7 +23,7 @@ export const usePokemonsStore = defineStore({
     nextUrl: '',
     previousUrl: '',
     isLoading: true,
-    favorites: JSON.parse(localStorage.getItem('favorites')) || [],
+    favorites: JSON.parse(localStorage.getItem('favorites') || ''),
     filteredList: []
   }),
   actions: {

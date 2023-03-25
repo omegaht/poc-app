@@ -18,14 +18,14 @@
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           v-if="previousUrl"
-          @click="pokemonsStore.fetchPokemons(previousUrl)"
+          @click="pokemonsStore.fetchPokemons(previousUrl || '')"
         >
           Previous
         </button>
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           v-if="nextUrl"
-          @click="pokemonsStore.fetchPokemons(nextUrl)"
+          @click="pokemonsStore.fetchPokemons(nextUrl || '')"
         >
           Next
         </button>

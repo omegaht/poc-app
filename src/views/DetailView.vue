@@ -47,7 +47,7 @@ import Navbar from '@/components/Navbar.vue'
 export default {
   data() {
     return {
-      pokemon: null,
+      pokemon: null as any,
       pokemonImg: null,
       isLoading: true
     }

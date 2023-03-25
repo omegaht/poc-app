@@ -11,7 +11,7 @@ interface SessionState {
 export const useAuthStore = defineStore({
   id: 'auth',
   state: (): SessionState => ({
-    user: JSON.parse(localStorage.getItem('session'))
+    user: JSON.parse(localStorage.getItem('session') || '')
   }),
 
   actions: {

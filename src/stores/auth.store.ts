@@ -10,9 +10,19 @@ interface SessionState {
 
 export const useAuthStore = defineStore({
   id: 'auth',
-  state: (): SessionState => ({
-    user: JSON.parse(localStorage.getItem('session') || '')
-  }),
+  state: (): SessionState => {
+    try {
+      const session = localStorage.getItem('session')
+      if (session) {
+        return {
+          user: JSON.parse(session)
+        }
+      }
+      return { user: null }
+    } catch (error) {
+      return { user: null }
+    }
+  },
 
   actions: {
     login(email: string, password: string) {
